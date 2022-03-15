@@ -1,0 +1,77 @@
+*{margin: 0;}
+
+/* Color of the links BEFORE scroll */
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon {
+  color: #fff;
+}
+
+/* Color of the links AFTER scroll */
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon {
+  color: #4f4f4f;
+}
+.navbar-inner {
+    background:transparent;
+}
+/* Color of the navbar AFTER scroll */
+.navbar-scrolled {
+  background-color: #fff;
+}
+
+/* An optional height of the navbar AFTER scroll */
+.navbar.navbar-scroll.navbar-scrolled {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/static/images/indexbackground.png');
+}
+
+.header{
+    width: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+
+.header ul{
+    text-align: center;
+}
+
+.header ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+.header ul li a{
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding: 25px;
+    transition: all ease 0.5s;
+}
+
+.header ul li a:hover{
+    background-color: #211b4385;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-47%, -50%);
+    padding: 5px;
+}
+
+.card:hover{
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}

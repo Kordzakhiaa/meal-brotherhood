@@ -2,8 +2,5 @@ div {
 text-align: center;
 }
 body{
-    background-image: url('/static/images/background.jpg');
-    background-repeat: no-repeat;
-    background-size: 1500px 850px;
-    background-attachment: fixed;
+    background-image: url('/static/images/register-login-background.jpg');
 }
