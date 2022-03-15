@@ -4,23 +4,6 @@ from django.views import View
 from django.contrib import messages
 
 from accounts.forms import CreateUserForm
-from accounts.models import Account
-
-
-class HomeView(View):
-    def get(self, request):
-        return render(request, 'meal_brotherhood/index.html')
-
-    def post(self, request):
-        pass
-
-
-class GetPerm(View):
-    def get(self, request):
-        user = Account.objects.get(id=request.user.id)
-        user.want_food = True
-        user.save()
-        return redirect('accounts:home')
 
 
 class RegisterView(View):
@@ -49,7 +32,7 @@ class LoginView(View):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('accounts:home')
+            return redirect('meal_brotherhood:home')
         else:
             messages.info(request, 'Username or Password is incorrect')
         return render(request, 'account/login.html')
@@ -57,4 +40,4 @@ class LoginView(View):
 
 def logout_page(request):
     logout(request)
-    return redirect('user:login_page')
+    return redirect('accounts:login')

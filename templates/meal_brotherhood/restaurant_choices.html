@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block card %}
+    <div class="center">
+        <div class="card" align="center">
+            <div class="card-body">
+                <br>
+                <br>
+                <h4 class="card-title">რომელი რესტორნის საკვები გნებავთ?</h4>
+                <br>
+                <br>
+                <br>
+                <label>
+                    <input type="radio">Macdonalds
+                </label>
+                <label>
+                    <input type="radio">შაურმა
+                </label>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-success" type="submit" value="არჩევა">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock card %}

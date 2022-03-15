@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block card %}
     <div class="center">
-        <div class="card" style="width: 40rem; height: 25rem" align="center">
+        <div class="card" align="center">
             <div class="card-body">
                 <br>
                 <br>
@@ -9,10 +9,11 @@
                 <br>
                 <br>
                 <br>
-                <a href="{% url 'meal_brotherhood:home' %}" class="btn btn-success">დიახ</a>
-                <a href="#" class="btn btn-danger">არა</a>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-success" type="submit" value="დიახ">
+                </form>
             </div>
-            {#        <a href="#" class="btn btn-primary">შემდეგ</a>#}
         </div>
     </div>
 {% endblock card %}

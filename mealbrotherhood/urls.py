@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required as lr
 from django.urls import path
 
-from accounts.views import RegisterView, LoginView, HomeView, GetPerm
+from mealbrotherhood.views import HomeView, RestaurantView
 
 app_name: str = 'meal_brotherhood'
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('', lr(HomeView.as_view()), name='home'),
+    path('restaurant_choices/', lr(RestaurantView.as_view()), name='restaurant_choices'),
 ]

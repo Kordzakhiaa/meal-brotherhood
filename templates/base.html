@@ -16,15 +16,14 @@
 
 <div class="header">
     <ul>
-        <li><a href="#">მთავარი</a></li>
+        <li><a href="{% url 'meal_brotherhood:home' %}">მთავარი</a></li>
         <li><a href="#">ჩვენს შესახებ</a></li>
         <li><a href="#">სერვისები</a></li>
         <li><a href="#">კონტაქტი</a></li>
+        <li><a href="{% url 'accounts:logout' %}">სისტემიდან გამოსვლა</a></li>
     </ul>
 </div>
 <br>
-<form method="POST">
     {% block card %} {% endblock card %}
-</form>
 </body>
 </html>
