@@ -5,6 +5,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
+from mealbrotherhood.models import Restaurant
+
 
 class AccountManager(BaseUserManager):
     use_in_migrations = True
@@ -45,6 +47,8 @@ class Account(AbstractUser):
     phone_number = models.CharField(max_length=50, verbose_name=_('Phone Number'))
     email = models.EmailField(_('email address'), unique=True)
     want_food = models.BooleanField(default=False)
+
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, null=True, blank=True)
 
     objects = AccountManager()
     USERNAME_FIELD = 'email'

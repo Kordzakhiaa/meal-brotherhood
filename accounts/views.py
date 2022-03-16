@@ -13,11 +13,14 @@ class RegisterView(View):
         return render(request, 'account/register.html', context)
 
     def post(self, request):
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('accounts:login')
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:login')
+
+        form = CreateUserForm()
+        context = {'form': form}
+        return render(request, 'account/register.html', context)
 
 
 class LoginView(View):

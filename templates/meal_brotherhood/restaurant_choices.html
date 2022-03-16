@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block card %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/alert.css" %}">
     <div class="center">
         <div class="card" align="center">
             <div class="card-body">
@@ -9,14 +11,22 @@
                 <br>
                 <br>
                 <br>
-                <label>
-                    <input type="radio">Macdonalds
-                </label>
-                <label>
-                    <input type="radio">შაურმა
-                </label>
-                <form method="POST">
+
+                <br>
+                <form method="POST" id="choice-form" class="choice-form">
                     {% csrf_token %}
+                    <select class="form-select" aria-label="Default select example" name="restaurant_name" id="restaurant_name">
+                        <option selected>Open this select menu</option>
+                        {% for restaurant in restaurants %}
+                            <option value={{ restaurant }}>{{ restaurant }}</option>
+                        {% endfor %}
+                    </select>
+                    {% if error %}
+                        <div class="alert">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <b>{{ error }}</b>
+                        </div>
+                    {% endif %}
                     <input class="btn btn-success" type="submit" value="არჩევა">
                 </form>
             </div>
