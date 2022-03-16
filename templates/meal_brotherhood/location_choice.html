@@ -9,17 +9,14 @@
                 <div class="card-body">
                     <br>
                     <br>
-                    <h4 class="card-title">რომელი რესტორნის საკვები გნებავთ?</h4>
+                    <h4 class="card-title">სად გსურთ რომ მიირთვათ?</h4>
                     <br>
                     <br>
                     <br>
-                    <br>
-                    <select class="form-select" aria-label="Default select example" name="restaurant_name"
-                            id="restaurant_name">
+                    <select class="form-select" aria-label="select location" name="location" id="location">
                         <option selected>გახსენით მენიუ</option>
-                        {% for restaurant in restaurants %}
-                            <option value={{ restaurant }}>{{ restaurant }}</option>
-                        {% endfor %}
+                        <option value=in_office>ოფისში</option>
+                        <option value=in_restaurant>რესტორანში</option>
                     </select>
                     {% if error %}
                         <div class="alert">
@@ -28,8 +25,6 @@
                         </div>
                     {% endif %}
                 </div>
-                <br>
-                <br>
                 <br>
                 <br>
                 <input class="btn btn-success" type="submit" value="არჩევა">

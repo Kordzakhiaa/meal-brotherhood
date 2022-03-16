@@ -41,14 +41,20 @@ class AccountManager(BaseUserManager):
 class Account(AbstractUser):
     """ Custom user model """
 
+    class InRestaurantOrInOffice(models.TextChoices):
+        NONE: str = 'None', 'None',
+        IN_RESTAURANT: str = 'in_restaurant', _('რესტორანში')
+        IN_OFFICE: str = 'in_office', _('ოფისში')
+
     username = None
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
-    phone_number = models.CharField(max_length=50, verbose_name=_('Phone Number'))
     email = models.EmailField(_('email address'), unique=True)
-    want_food = models.BooleanField(default=False)
 
+    eating_location = models.CharField(max_length=150, choices=InRestaurantOrInOffice.choices,
+                                       default=InRestaurantOrInOffice.NONE)
     restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, null=True, blank=True)
+    want_food = models.BooleanField(default=False)
 
     objects = AccountManager()
     USERNAME_FIELD = 'email'

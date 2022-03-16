@@ -24,14 +24,12 @@ class CreateUserForm(UserCreationForm):
     last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Your LastName'}))
 
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Your Email'}))
-    phone_number = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Phone number'}))
 
     class Meta:
         model = Account
         fields = [
             'first_name',
             'last_name',
-            'phone_number',
             'email',
             'password1',
             'password2',
