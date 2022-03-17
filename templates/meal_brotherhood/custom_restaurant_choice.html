@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block card %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/alert.css" %}">
+    <div class="center">
+        <div class="card" align="center">
+            <form method="POST" id="choice-form" class="choice-form">
+                {% csrf_token %}
+                <div class="card-body">
+                    <h4 class="card-title">რესტორნის დამატება</h4>
+                </div>
+                {{ form.as_p }}
+                <input class="btn btn-success" type="submit" value="არჩევა">
+            </form>
+        </div>
+    </div>
+{% endblock card %}

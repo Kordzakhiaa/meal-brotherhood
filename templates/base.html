@@ -19,7 +19,7 @@
         <li><a href="{% url 'meal_brotherhood:home' %}">მთავარი</a></li>
         <li><a href="#">ჩვენს შესახებ</a></li>
         <li><a href="#">სერვისები</a></li>
-        <li><a href="#">კონტაქტი</a></li>
+        <li><a href="{% url 'accounts:user_profile' %}">ჩემი პროფილი</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'accounts:logout' %}">სისტემიდან გამოსვლა</a></li>
         {% endif %}

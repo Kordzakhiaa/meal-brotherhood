@@ -44,3 +44,10 @@ class LoginView(View):
 def logout_page(request):
     logout(request)
     return redirect('accounts:login')
+
+
+class UserProfileView(View):
+    """ @TODO: DOC, USER PROFILE!!! """
+    def get(self, request, *args, **kwargs):
+        """ Profile """
+        return render(request, 'account/user_profile.html')
