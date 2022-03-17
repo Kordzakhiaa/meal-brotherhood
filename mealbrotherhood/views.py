@@ -61,7 +61,6 @@ class RestaurantChoiceView(View):
 
     def post(self, request, *args, **kwargs):
         """ @TODO: doc """
-        user = Account.objects.get(id=request.user.id)
 
         if request.POST['restaurant_name'] == 'გახსენით მენიუ':
             return render(request, self.template_name,
@@ -72,6 +71,7 @@ class RestaurantChoiceView(View):
             return redirect('meal_brotherhood:add_restaurant')
 
         restaurant = Restaurant.objects.get(restaurant_name=request.POST['restaurant_name'])
+        user = Account.objects.get(id=request.user.id)
         user.restaurant = restaurant
         user.save()
 
@@ -90,6 +90,27 @@ class CustomRestaurantChoiceView(View):
     def post(self, request, *args, **kwargs):
         """ @TODO: doc """
         form = self.form(request.POST)
-        print(form.is_valid())
+
+        # @TODO: QUESTION -> form always invalid if given input is in DB  !!!!! DATA | DACHI
+        if form.is_valid():
+            inputted_restaurant: str = form.data.get('restaurant_name')
+
+            if self.check_restaurant(inputted_restaurant):
+                return render(request, self.template_name,
+                              {'form': form, 'error': 'რესტორანი ამ დასახელებით უკვე არსებობს, სცადეთ თავიდან!'})
+
+            restaurant = Restaurant.objects.create(restaurant_name=inputted_restaurant)
+            user = Account.objects.get(id=request.user.id)
+            user.restaurant = restaurant
+            user.save()
 
         return redirect('meal_brotherhood:home')
+
+    @staticmethod
+    def check_restaurant(given_restaurant_name: str) -> bool:
+        # @TODO: change code location:))
+        try:
+            if Restaurant.objects.get(restaurant_name__istartswith=given_restaurant_name):
+                return True
+        except Restaurant.DoesNotExist:
+            return False

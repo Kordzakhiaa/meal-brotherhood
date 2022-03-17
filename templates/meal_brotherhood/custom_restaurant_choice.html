@@ -10,6 +10,14 @@
                     <h4 class="card-title">რესტორნის დამატება</h4>
                 </div>
                 {{ form.as_p }}
+                {% if error %}
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <b>{{ error }}</b>
+                    </div>
+                {% endif %}
+                <br>
+                <br>
                 <input class="btn btn-success" type="submit" value="არჩევა">
             </form>
         </div>
