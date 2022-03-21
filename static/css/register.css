@@ -16,7 +16,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 300;
-    src: url("../fonts/montserrat/Montserrat-Light.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -24,7 +23,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/montserrat/Montserrat-Regular.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -32,7 +30,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: italic;
     font-weight: 400;
-    src: url("../fonts/montserrat/Montserrat-Italic.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -40,7 +37,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
-    src: url("../fonts/montserrat/Montserrat-Medium.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -48,7 +44,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    src: url("../fonts/montserrat/Montserrat-SemiBold.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -56,7 +51,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    src: url("../fonts/montserrat/Montserrat-Bold.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -64,7 +58,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: italic;
     font-weight: 700;
-    src: url("../fonts/montserrat/Montserrat-BoldItalic.ttf");
     /* IE9 Compat Modes */
 }
 
@@ -72,7 +65,6 @@ list-type-ulli {
     font-family: 'Montserrat';
     font-style: italic;
     font-weight: 900;
-    src: url("../fonts/montserrat/montserrat-v12-latin-900.ttf"), url("../fonts/montserrat/montserrat-v12-latin-900.eot") format("embedded-opentype"), url("../fonts/montserrat/montserrat-v12-latin-900.svg") format("woff2"), url("../fonts/montserrat/montserrat-v12-latin-900.woff") format("woff"), url("../fonts/montserrat/montserrat-v12-latin-900.woff2") format("truetype");
 }
 
 a:focus, a:active {

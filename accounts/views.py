@@ -9,6 +9,8 @@ from accounts.forms import CreateUserForm
 
 class RegisterView(View):
     def get(self, request: WSGIRequest, *args, **kwargs):
+        if request.user.is_authenticated:
+            redirect('meal_brotherhood:home')
         form = CreateUserForm()
         context = {'form': form}
         return render(request, 'account/register.html', context)
