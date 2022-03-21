@@ -5,13 +5,14 @@
             <div class="card-body">
                 <br>
                 <br>
-                <h4 class="card-title">გამარჯობა, გსურთ საჭმლის მირთმევა?</h4>
+                <h4 class="card-title">შეგიძლიათ ყველას მაგივრად გადახდა?</h4>
                 <br>
                 <br>
                 <br>
                 <form method="POST">
                     {% csrf_token %}
-                    <input class="btn btn-success" type="submit" value="დიახ">
+                    <input class="btn btn-success" type="submit" value="დიახ" name="choice">
+                    <input class="btn btn-danger" type="submit" value="არა" name="choice">
                 </form>
             </div>
         </div>

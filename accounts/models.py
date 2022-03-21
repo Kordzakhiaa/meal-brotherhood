@@ -30,7 +30,6 @@ class AccountManager(BaseUserManager):
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('phone_number', '0')
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
@@ -55,6 +54,7 @@ class Account(AbstractUser):
                                        default=InRestaurantOrInOffice.NONE)
     restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, null=True, blank=True)
     want_food = models.BooleanField(default=False)
+    pays = models.BooleanField(default=False)
 
     objects = AccountManager()
     USERNAME_FIELD = 'email'
