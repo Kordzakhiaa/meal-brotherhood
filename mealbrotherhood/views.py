@@ -12,17 +12,6 @@ from mealbrotherhood.models import Restaurant
 # @TODO: dont want to eat button:))
 # @TODO: user can pay or not
 
-class UserProfile(View):
-    template_name = 'meal_brotherhood/profile.html'
-
-    def get(self, request: WSGIRequest, *args, **kwargs):
-        """ @TODO: doc """
-
-        return render(request, self.template_name)
-
-    def post(self, request: WSGIRequest, *args, **kwargs):
-        pass
-
 
 class HomeView(View):
     """ @TODO: DOC """
@@ -78,6 +67,7 @@ class EatingPlaceView(View):
 
         user = Account.objects.get(id=request.user.id)
         eating_place = request.POST['location']
+        print(eating_place)
         user.eating_location = eating_place
         user.save()
 

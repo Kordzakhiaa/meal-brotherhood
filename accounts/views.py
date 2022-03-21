@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -7,12 +8,12 @@ from accounts.forms import CreateUserForm
 
 
 class RegisterView(View):
-    def get(self, request):
+    def get(self, request: WSGIRequest, *args, **kwargs):
         form = CreateUserForm()
         context = {'form': form}
         return render(request, 'account/register.html', context)
 
-    def post(self, request):
+    def post(self, request: WSGIRequest, *args, **kwargs):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
@@ -24,12 +25,12 @@ class RegisterView(View):
 
 
 class LoginView(View):
-    def get(self, request):
+    def get(self, request: WSGIRequest, *args, **kwargs):
         form = CreateUserForm()
         context = {'form': form}
         return render(request, 'account/login.html', context)
 
-    def post(self, request):
+    def post(self, request: WSGIRequest, *args, **kwargs):
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
@@ -47,7 +48,12 @@ def logout_page(request):
 
 
 class UserProfileView(View):
-    """ @TODO: DOC, USER PROFILE!!! """
-    def get(self, request, *args, **kwargs):
-        """ Profile """
-        return render(request, 'account/user_profile.html')
+    template_name = 'account/profile.html'
+
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        """ @TODO: doc """
+
+        return render(request, self.template_name)
+
+    def post(self, request: WSGIRequest, *args, **kwargs):
+        pass

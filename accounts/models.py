@@ -42,17 +42,18 @@ class Account(AbstractUser):
 
     class InRestaurantOrInOffice(models.TextChoices):
         NONE: str = 'None', 'None',
-        IN_RESTAURANT: str = 'in_restaurant', _('რესტორანში')
-        IN_OFFICE: str = 'in_office', _('ოფისში')
+        IN_RESTAURANT: str = 'რესტორანში', ('რესტორანში')
+        IN_OFFICE: str = 'ოფისში', ('ოფისში')
 
     username = None
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), unique=True)
 
+    restaurant = models.ForeignKey(to=Restaurant, on_delete=models.SET_NULL, null=True, blank=True)
+
     eating_location = models.CharField(max_length=150, choices=InRestaurantOrInOffice.choices,
                                        default=InRestaurantOrInOffice.NONE)
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=models.CASCADE, null=True, blank=True)
     want_food = models.BooleanField(default=False)
     pays = models.BooleanField(default=False)
 

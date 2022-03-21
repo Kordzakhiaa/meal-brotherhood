@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block card %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/profile.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="card">
+        <img src="{% static 'images/default_profile_pic.png' %}" alt="John" style="width:100%">
+        {% if user.first_name %}
+            <h2>{{ user.first_name }}</h2>
+        {% else %}
+            <h2>{{ user }}</h2>
+        {% endif %}
+        <hr>
+        {% if user.want_food and user.eating_location and user.restaurant %}
+            <p><img src="{% static 'images/location_icon.png' %}" width="35" height="35"
+                    alt="">{{ user.eating_location }}</p>
+            <p><img src="{% static 'images/restaurant_icon.png' %}" width="35" height="35"
+                    alt=""> {{ user.restaurant }}</p>
+            {% if user.pays %}
+                <p><img src="{% static 'images/pay.png' %}" width="45" height="35"
+                        alt="">იხდის</p>
+            {% endif %}
+
+        {% else %}
+            <p>მე ჯერ არ მაქვს არჩევანი გაკეთებული, რას მივირთმევ სად და როგორ😄</p>
+        {% endif %}
+        <p>
+            <button>Contact</button>
+        </p>
+    </div>
+{% endblock card %}
