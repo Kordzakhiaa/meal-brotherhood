@@ -4,18 +4,22 @@
 {% block card %}
     <link rel="stylesheet" type="text/css" href="{% static "css/home_cards.css" %}">
     <div class="container">
-        <div class="row">
-            {% for restaurant in restaurants %}
+        <div class="row align-items-center">
+            {% for restaurant, accounts in data.items %}
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <a href="">
                             <img src="{% static "images/mc.png" %}" class="card-img-top" height="230"
                                  alt="">
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                            <div class="my-center">
+                                <h4 class="card-title">{{ restaurant }}</h4>
+                                <p class="card-text">{{ accounts.count }}</p>
+                                {% for account in accounts %}
+                                    <p class="card-text">{{ account }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>

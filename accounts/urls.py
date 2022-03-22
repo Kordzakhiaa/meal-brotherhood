@@ -7,8 +7,8 @@ from accounts.views import RegisterView, LoginView, UserProfileView, LogoutPageV
 app_name: str = 'accounts'
 
 urlpatterns = [
-    path('register/', restrict_access(RegisterView.as_view()), name='register'),
-    path('login/', restrict_access(LoginView.as_view()), name='login'),
+    path('register/', (RegisterView.as_view()), name='register'),
+    path('login/', (LoginView.as_view()), name='login'),
     path('logout/', lr(LogoutPageView.as_view()), name='logout'),
 
     path('profile/', UserProfileView.as_view(), name='user_profile'),

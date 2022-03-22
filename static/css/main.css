@@ -1,6 +1,7 @@
 div {
-text-align: center;
+    text-align: center;
 }
-body{
+
+body {
     background-image: url('/static/images/register-login-background.jpg');
 }

@@ -49,7 +49,7 @@ class Account(AbstractUser):
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), unique=True)
-
+    # @TODO: create new model for restaurant, eating_location, want_food and pays or not
     restaurant = models.ForeignKey(to=Restaurant, on_delete=models.SET_NULL, null=True, blank=True)
 
     eating_location = models.CharField(max_length=150, choices=InRestaurantOrInOffice.choices,

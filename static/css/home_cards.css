@@ -6,4 +6,13 @@
 .card {
     transition: 0.5s;
     opacity: .9;
+    margin-bottom: 30px;
+}
+
+.center {
+    top: 55%;
+}
+
+.my-center {
+    text-align: center;
 }

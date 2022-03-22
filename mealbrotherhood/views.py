@@ -17,8 +17,15 @@ class HomeView(View):
 
     def get(self, request: WSGIRequest, *args, **kwargs):
         restaurants = Restaurant.objects.all()
+        users = Account.objects.all()
+        data: dict = {}
 
-        return render(request, self.template_name, {'restaurants': restaurants})
+        for restaurant in restaurants:
+            for user in users:
+                if restaurant == user.restaurant:
+                    data[restaurant] = Account.objects.filter(restaurant=restaurant)
+
+        return render(request, self.template_name, {'data': data})
 
 
 class MealQuestionnaireView(View):
