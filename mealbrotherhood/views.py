@@ -10,12 +10,20 @@ from mealbrotherhood.models import Restaurant
 
 # @TODO: At last disable for all users who have 'want_food'-field TRUE
 # @TODO: dont want to eat button:))
-# @TODO: user can pay or not
-
+# @TODO: add account number and show it on home page for all users
 
 class HomeView(View):
-    """ @TODO: DOC """
     template_name = 'meal_brotherhood/home.html'
+
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        restaurants = Restaurant.objects.all()
+
+        return render(request, self.template_name, {'restaurants': restaurants})
+
+
+class MealQuestionnaireView(View):
+    """ @TODO: DOC """
+    template_name = 'meal_brotherhood/meal_questionnaire.html'
 
     def get(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
@@ -42,11 +50,16 @@ class CanPay(View):
 
     def post(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
+        user = Account.objects.get(id=request.user.id)
 
         if request.POST['choice'] == 'დიახ':
-            user = Account.objects.get(id=request.user.id)
             user.pays = True
             user.save()
+            return redirect('meal_brotherhood:eating_place')
+
+        # IF CHOICE == 'არა' (NO)
+        user.pays = False
+        user.save()
         return redirect('meal_brotherhood:eating_place')
 
 

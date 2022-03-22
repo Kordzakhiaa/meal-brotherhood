@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block card %}
+    <div class="center">
+        <div class="card" align="center">
+            <div class="card-body">
+                <br>
+                <br>
+                <h4 class="card-title">გამარჯობა, გსურთ საჭმლის მირთმევა?</h4>
+                <br>
+                <br>
+                <br>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-success" type="submit" value="დიახ">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock card %}

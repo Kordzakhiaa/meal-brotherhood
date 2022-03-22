@@ -17,7 +17,7 @@
 <div class="header">
     <ul>
         <li><a href="{% url 'meal_brotherhood:home' %}">მთავარი</a></li>
-        <li><a href="#">ჩვენს შესახებ</a></li>
+        <li><a href="{% url 'meal_brotherhood:meal_questionnaire' %}">კითხვარი</a></li>
         <li><a href="#">სერვისები</a></li>
         <li><a href="{% url 'accounts:user_profile' %}">ჩემი პროფილი</a></li>
         {% if user.is_authenticated %}

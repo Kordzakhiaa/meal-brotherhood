@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block card %}
-    <div class="center">
-        <div class="card" align="center">
-            <div class="card-body">
-                <br>
-                <br>
-                <h4 class="card-title">გამარჯობა, გსურთ საჭმლის მირთმევა?</h4>
-                <br>
-                <br>
-                <br>
-                <form method="POST">
-                    {% csrf_token %}
-                    <input class="btn btn-success" type="submit" value="დიახ">
-                </form>
-            </div>
+    <link rel="stylesheet" type="text/css" href="{% static "css/home_cards.css" %}">
+    <div class="container">
+        <div class="row">
+            {% for restaurant in restaurants %}
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <a href="">
+                            <img src="{% static "images/mc.png" %}" class="card-img-top" height="230"
+                                 alt="">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock card %}

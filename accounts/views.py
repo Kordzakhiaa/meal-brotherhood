@@ -9,8 +9,6 @@ from accounts.forms import CreateUserForm
 
 class RegisterView(View):
     def get(self, request: WSGIRequest, *args, **kwargs):
-        if request.user.is_authenticated:
-            redirect('meal_brotherhood:home')
         form = CreateUserForm()
         context = {'form': form}
         return render(request, 'account/register.html', context)
@@ -44,11 +42,6 @@ class LoginView(View):
         return render(request, 'account/login.html')
 
 
-def logout_page(request):
-    logout(request)
-    return redirect('accounts:login')
-
-
 class UserProfileView(View):
     template_name = 'account/profile.html'
 
@@ -59,3 +52,9 @@ class UserProfileView(View):
 
     def post(self, request: WSGIRequest, *args, **kwargs):
         pass
+
+
+class LogoutPageView(View):
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        logout(request)
+        return redirect('accounts:login')
