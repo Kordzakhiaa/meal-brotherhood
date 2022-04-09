@@ -15,9 +15,9 @@
                         <div class="card-body">
                             <div class="my-center">
                                 <h4 class="card-title">{{ restaurant }}</h4>
-                                <p class="card-text">{{ accounts.count }}</p>
+                                <p class="card-text">მიირთმევს <b>{{ accounts.count }}</b> ადამიანი</p>
                                 {% for account in accounts %}
-                                    <p class="card-text">{{ account }}</p>
+                                    <p class="card-text">{{ account }} -> {{ account.eating_location }}</p>
                                 {% endfor %}
                             </div>
                         </div>
@@ -25,5 +25,6 @@
                 </div>
             {% endfor %}
         </div>
+
     </div>
 {% endblock card %}

@@ -1,6 +1,6 @@
 from django import forms
 
-from mealbrotherhood.models import Restaurant
+from mealbrotherhood.models import Restaurant, Question, Poll
 
 
 class RestaurantForm(forms.ModelForm):
@@ -9,3 +9,15 @@ class RestaurantForm(forms.ModelForm):
     class Meta:
         model = Restaurant
         fields = ['restaurant_name']
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['want_eat']
+
+
+class PollForm(forms.ModelForm):
+    class Meta:
+        model = Poll
+        fields = ['restaurant', 'menu', 'eating_location', 'pays_or_not']

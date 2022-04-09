@@ -3,12 +3,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from accounts.models import Account
-from mealbrotherhood.forms import RestaurantForm
+from mealbrotherhood.forms import RestaurantForm, QuestionForm
 
-from mealbrotherhood.models import Restaurant
+from mealbrotherhood.models import Restaurant, Question
 
 
-# @TODO: At last disable for all users who have 'want_food'-field TRUE
 # @TODO: dont want to eat button:))
 # @TODO: add account number and show it on home page for all users
 
@@ -20,12 +19,29 @@ class HomeView(View):
         users = Account.objects.all()
         data: dict = {}
 
-        for restaurant in restaurants:
-            for user in users:
-                if restaurant == user.restaurant:
-                    data[restaurant] = Account.objects.filter(restaurant=restaurant)
+        # for restaurant in restaurants:
+        #     for user in users:
+        #         if  restaurant == user.restaurant:
+        #             data[restaurant] = Account.objects.filter(restaurant=restaurant)
 
         return render(request, self.template_name, {'data': data})
+
+
+class WantFoodOrNotChoiceView(View):
+    template_name = 'meal_brotherhood/want_food.html'
+
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        """ @TODO: doc """
+
+        return render(request, self.template_name)
+
+    def post(self, request: WSGIRequest, *args, **kwargs):
+        """ @TODO: doc """
+
+        if request.POST.get('choice') == 'დიახ':
+            Question.objects.create(user_id=request.user.id, want_eat=True)
+            return redirect('meal_brotherhood:meal_questionnaire')
+        return redirect('meal_brotherhood:home')
 
 
 class MealQuestionnaireView(View):
@@ -40,10 +56,7 @@ class MealQuestionnaireView(View):
     def post(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
 
-        user = Account.objects.get(id=request.user.id)
-        user.want_food = True
-        user.save()
-        return redirect('meal_brotherhood:pays_or_not')
+        return redirect('meal_brotherhood:home')
 
 
 class CanPay(View):

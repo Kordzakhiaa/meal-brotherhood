@@ -5,8 +5,6 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
-from mealbrotherhood.models import Restaurant
-
 
 class AccountManager(BaseUserManager):
     use_in_migrations = True
@@ -40,22 +38,10 @@ class AccountManager(BaseUserManager):
 class Account(AbstractUser):
     """ Custom user model """
 
-    class InRestaurantOrInOffice(models.TextChoices):
-        NONE: str = 'None', 'None',
-        IN_RESTAURANT: str = 'რესტორანში', ('რესტორანში')
-        IN_OFFICE: str = 'ოფისში', ('ოფისში')
-
     username = None
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), unique=True)
-    # @TODO: create new model for restaurant, eating_location, want_food and pays or not
-    restaurant = models.ForeignKey(to=Restaurant, on_delete=models.SET_NULL, null=True, blank=True)
-
-    eating_location = models.CharField(max_length=150, choices=InRestaurantOrInOffice.choices,
-                                       default=InRestaurantOrInOffice.NONE)
-    want_food = models.BooleanField(default=False)
-    pays = models.BooleanField(default=False)
 
     objects = AccountManager()
     USERNAME_FIELD = 'email'
