@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from accounts.models import Account
-from mealbrotherhood.forms import RestaurantForm, QuestionForm
+from mealbrotherhood.forms import RestaurantForm, PollForm
 
-from mealbrotherhood.models import Restaurant, Question
+from mealbrotherhood.models import Restaurant, Question, Poll
 
 
 # @TODO: dont want to eat button:))
@@ -15,8 +15,7 @@ class HomeView(View):
     template_name = 'meal_brotherhood/home.html'
 
     def get(self, request: WSGIRequest, *args, **kwargs):
-        restaurants = Restaurant.objects.all()
-        users = Account.objects.all()
+        polls = Poll.objects.all()
         data: dict = {}
 
         # for restaurant in restaurants:
@@ -24,7 +23,7 @@ class HomeView(View):
         #         if  restaurant == user.restaurant:
         #             data[restaurant] = Account.objects.filter(restaurant=restaurant)
 
-        return render(request, self.template_name, {'data': data})
+        return render(request, self.template_name, {'polls': polls})
 
 
 class WantFoodOrNotChoiceView(View):
@@ -47,14 +46,22 @@ class WantFoodOrNotChoiceView(View):
 class MealQuestionnaireView(View):
     """ @TODO: DOC """
     template_name = 'meal_brotherhood/meal_questionnaire.html'
+    form = PollForm
 
     def get(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, {'form': self.form})
 
     def post(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
+        form = self.form(request.POST)
+
+        if form.is_valid():
+            # @TODO: Check if user has already chosen...
+            choice = form.save(commit=False)
+            choice.question = Question.objects.order_by('-created_date').filter(user_id=request.user.id).first()
+            choice.save()
 
         return redirect('meal_brotherhood:home')
 
@@ -148,7 +155,6 @@ class CustomRestaurantChoiceView(View):
         """ @TODO: doc """
         form = self.form(request.POST)
 
-        # @TODO: QUESTION -> form always invalid if given input is in DB  !!!!! DATA | DACHI
         if form.is_valid():
             inputted_restaurant: str = form.data.get('restaurant_name')
 

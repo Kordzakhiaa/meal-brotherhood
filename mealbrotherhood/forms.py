@@ -11,12 +11,6 @@ class RestaurantForm(forms.ModelForm):
         fields = ['restaurant_name']
 
 
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = ['want_eat']
-
-
 class PollForm(forms.ModelForm):
     class Meta:
         model = Poll

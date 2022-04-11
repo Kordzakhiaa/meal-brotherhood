@@ -5,25 +5,26 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/home_cards.css" %}">
     <div class="container">
         <div class="row align-items-center">
-            {% for restaurant, accounts in data.items %}
-                <div class="col-md-4">
-                    <div class="card">
-                        <a href="">
-                            <img src="{% static "images/mc.png" %}" class="card-img-top" height="230"
-                                 alt="">
-                        </a>
-                        <div class="card-body">
-                            <div class="my-center">
-                                <h4 class="card-title">{{ restaurant }}</h4>
-                                <p class="card-text">მიირთმევს <b>{{ accounts.count }}</b> ადამიანი</p>
-                                {% for account in accounts %}
-                                    <p class="card-text">{{ account }} -> {{ account.eating_location }}</p>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+            <p>{{ polls }}</p>
+{#            {% for restaurant, accounts in data.items %}#}
+{#                <div class="col-md-4">#}
+{#                    <div class="card">#}
+{#                        <a href="">#}
+{#                            <img src="{% static "images/mc.png" %}" class="card-img-top" height="230"#}
+{#                                 alt="">#}
+{#                        </a>#}
+{#                        <div class="card-body">#}
+{#                            <div class="my-center">#}
+{#                                <h4 class="card-title">{{ polls }}</h4>#}
+{#                                <p class="card-text">მიირთმევს <b>{{ accounts.count }}</b> ადამიანი</p>#}
+{#                                {% for account in accounts %}#}
+{#                                    <p class="card-text">{{ account }} -> {{ account }}</p>#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
         </div>
 
     </div>
