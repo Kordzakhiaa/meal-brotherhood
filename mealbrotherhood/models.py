@@ -16,7 +16,7 @@ class Question(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.first_name} want_eat={self.want_eat}'
+        return f'{self.user.first_name} want_eat={self.want_eat} {self.created_date}'
 
 
 class Poll(models.Model):

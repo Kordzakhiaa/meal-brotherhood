@@ -1,4 +1,7 @@
+from datetime import datetime, timedelta
+
 from django.core.handlers.wsgi import WSGIRequest
+
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -11,6 +14,7 @@ from mealbrotherhood.models import Restaurant, Question, Poll
 # @TODO: dont want to eat button:))
 # @TODO: add account number and show it on home page for all users
 
+
 class HomeView(View):
     template_name = 'meal_brotherhood/home.html'
 
@@ -18,12 +22,10 @@ class HomeView(View):
         polls = Poll.objects.all()
         data: dict = {}
 
-        # for restaurant in restaurants:
-        #     for user in users:
-        #         if  restaurant == user.restaurant:
-        #             data[restaurant] = Account.objects.filter(restaurant=restaurant)
+        for poll in polls:
+            data[poll.restaurant] = Poll.objects.filter(question__poll__restaurant=poll.restaurant)
 
-        return render(request, self.template_name, {'polls': polls})
+        return render(request, self.template_name, {'polls': polls, 'data': data})
 
 
 class WantFoodOrNotChoiceView(View):
@@ -36,11 +38,20 @@ class WantFoodOrNotChoiceView(View):
 
     def post(self, request: WSGIRequest, *args, **kwargs):
         """ @TODO: doc """
+        today_chosen = Question.objects.filter(user_id=request.user.id, created_date__day=datetime.today().day)
 
-        if request.POST.get('choice') == 'დიახ':
-            Question.objects.create(user_id=request.user.id, want_eat=True)
+        if request.POST.get("choice") == "არა":
+            if today_chosen:
+                today_chosen.update(want_eat=False)
+            return redirect('meal_brotherhood:home')
+
+        # IF CHOICE == კი
+        if today_chosen:
+            today_chosen.update(want_eat=True)
             return redirect('meal_brotherhood:meal_questionnaire')
-        return redirect('meal_brotherhood:home')
+
+        Question.objects.create(user_id=request.user.id, want_eat=True)
+        return redirect('meal_brotherhood:meal_questionnaire')
 
 
 class MealQuestionnaireView(View):
